@@ -1,11 +1,9 @@
-</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sarfraz.work</title>
-  <!-- Use professional web fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -81,6 +79,67 @@
     section p {
       font-size: 1.1em;
       color: #333;
+      margin-bottom: 1em;
+    }
+
+    /* CV Button */
+    .cv-button {
+      display: inline-block;
+      padding: 0.7em 1.5em;
+      background: #0072ff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .cv-button:hover {
+      background: #005bb5;
+    }
+
+    /* Image Gallery */
+    .image-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2em;
+      justify-content: center;
+      margin-top: 2em;
+    }
+
+    .image-gallery img {
+      width: 250px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .image-gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Lightbox Styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 4px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .lightbox:target {
+      display: flex;
     }
 
     footer {
@@ -109,23 +168,44 @@
 
   <main>
     <h2>Welcome to Sarfraz.work</h2>
-    <p>A professional landing page. Explore the sections below to learn more about me and my work.</p>
+    <p>Your professional landing page. Explore the sections below to learn more about me and my work.</p>
   </main>
 
   <section id="about">
     <h2>About Me</h2>
-    <p>Hello! I’m Yakob. I specialize in Shiping and logistics. I bring insights, professional services, and thought leadership in my field.</p>
+    <p>Hello! I’m Sarfraz. I specialize in [your profession/consulting services]. This section introduces who I am, my expertise, and my professional approach.</p>
   </section>
 
   <section id="info">
     <h2>Info</h2>
-    <p>This section provides detailed information about services, projects, or resources relevant to clients and visitors. It will include downloadable content or links to professional references.</p>
+    <p>This section provides detailed information about my services, projects, and professional work.</p>
+    <p>
+      <a href="cv.pdf" download class="cv-button">Download My CV</a>
+    </p>
   </section>
 
   <section id="testing">
     <h2>Testing Area</h2>
-    <p>This area is reserved for experimentation, dynamic content, or feature demonstrations. It will evolve as the website grows.</p>
+    <p>This area is reserved for showcasing selected images or projects. Click an image to view it larger.</p>
+    <div class="image-gallery">
+      <a href="#img1"><img src="images/project1.jpg" alt="Project 1"></a>
+      <a href="#img2"><img src="images/project2.jpg" alt="Project 2"></a>
+      <a href="#img3"><img src="images/project3.jpg" alt="Project 3"></a>
+    </div>
   </section>
+
+  <!-- Lightbox Modals -->
+  <div class="lightbox" id="img1">
+    <a href="#"><img src="images/project1.jpg" alt="Project 1"></a>
+  </div>
+
+  <div class="lightbox" id="img2">
+    <a href="#"><img src="images/project2.jpg" alt="Project 2"></a>
+  </div>
+
+  <div class="lightbox" id="img3">
+    <a href="#"><img src="images/project3.jpg" alt="Project 3"></a>
+  </div>
 
   <footer>
     &copy; 2025 Sarfraz.work | All Rights Reserved
