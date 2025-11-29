@@ -25,6 +25,12 @@
       top: 0;
       background: #fff;
       z-index: 100;
+      animation: fade-down 0.8s;
+    }
+
+    @keyframes fade-down {
+      from { opacity: 0; transform: translateY(-30px);}
+      to   { opacity: 1; transform: translateY(0);}
     }
 
     header h1 {
@@ -39,41 +45,44 @@
       color: #333;
       font-weight: 600;
       transition: color 0.3s ease;
+      position: relative;
     }
 
     nav a:hover {
       color: #0072ff;
+      top: -2px;
     }
 
     main {
       padding: 4em 2em;
       text-align: center;
+      animation: fade-in 0.8s;
     }
 
-    main h2 {
-      font-weight: 700;
-      font-size: 2em;
-      margin-bottom: 1em;
-    }
-
-    main p {
-      max-width: 600px;
-      margin: auto;
-      font-size: 1.1em;
-      color: #555;
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(30px);}
+      to   { opacity: 1; transform: translateY(0);}
     }
 
     section {
       padding: 6em 2em;
       max-width: 1000px;
       margin: auto;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(.42,.53,.53,.91);
     }
-
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
     section h2 {
       font-weight: 700;
       font-size: 1.8em;
       color: #0072ff;
       margin-bottom: 1em;
+      letter-spacing: .02em;
+      opacity: .94;
     }
 
     section p {
@@ -91,11 +100,13 @@
       text-decoration: none;
       border-radius: 4px;
       font-weight: 600;
-      transition: background 0.3s ease;
+      transition: background 0.3s, transform 0.25s;
+      box-shadow: 0 2px 8px rgba(0,114,255,0.07);
     }
 
     .cv-button:hover {
       background: #005bb5;
+      transform: scale(1.06);
     }
 
     /* Image Gallery */
@@ -112,34 +123,84 @@
       border-radius: 4px;
       border: 1px solid #ddd;
       cursor: pointer;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s, box-shadow 0.2s;
+      box-shadow: 0 1px 6px rgba(50,60,90,0.08);
     }
 
     .image-gallery img:hover {
-      transform: scale(1.05);
+      transform: scale(1.08);
+      box-shadow: 0 6px 24px rgba(0,114,255,0.08);
     }
 
     /* Lightbox Styles */
-    .lightbox {
+    .lightbox-overlay {
       display: none;
       position: fixed;
       top: 0; left: 0;
-      width: 100%; height: 100%;
+      width: 100vw; height: 100vh;
       background: rgba(0,0,0,0.85);
       justify-content: center;
       align-items: center;
       z-index: 1000;
+      animation: fade-in 0.5s;
     }
-
-    .lightbox img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 4px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
-
-    .lightbox:target {
+    .lightbox-overlay.active {
       display: flex;
+    }
+    .lightbox-img-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 8px;
+      box-shadow: 0 0 24px rgba(0,30,60,0.18);
+      background: #fff;
+      animation: img-pop .45s;
+    }
+    @keyframes img-pop {
+      from { transform: scale(0.7); opacity:0;}
+      to { transform: scale(1); opacity:1;}
+    }
+    .arrow {
+      font-size: 2.2em;
+      color: #fff;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0.3em 0.8em;
+      cursor: pointer;
+      background: rgba(0,114,255,0.15);
+      border-radius: 6px;
+      transition: background 0.2s;
+      z-index: 30;
+      user-select: none;
+    }
+    .arrow.left { left: -64px; }
+    .arrow.right { right: -64px; }
+    .arrow:hover { background: rgba(0,114,255,0.33); }
+    .close-btn {
+      position: absolute;
+      top: -48px;
+      right: 0;
+      font-size: 1.8em;
+      color: #fff;
+      background: rgba(0,0,0,0.26);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      border: none;
+      text-align: center;
+      transition: background 0.2s;
+      z-index: 40;
+    }
+    .close-btn:hover {
+      background: rgba(0,114,255,0.64);
+      color: #fff;
     }
 
     footer {
@@ -148,6 +209,7 @@
       border-top: 1px solid #ddd;
       font-size: 0.9em;
       color: #777;
+      animation: fade-in 1.2s;
     }
 
     html {
@@ -168,17 +230,17 @@
 
   <main>
     <h2>Welcome to Sarfraz.work</h2>
-    <p>Your professional landing page. Explore the sections below to learn more about me and my work.</p>
+    <p>Your professional landing page for consulting and financial services. Explore below to learn more about my expertise.</p>
   </main>
 
   <section id="about">
     <h2>About Me</h2>
-    <p>Hello! I’m Sarfraz. I specialize in [your profession/consulting services]. This section introduces who I am, my expertise, and my professional approach.</p>
+    <p>Hello! I’m Sarfraz. I specialize in consulting, banking, and finance. This section introduces who I am, my expertise, and my professional approach to helping individuals and businesses thrive.</p>
   </section>
 
   <section id="info">
     <h2>Info</h2>
-    <p>This section provides detailed information about my services, projects, and professional work.</p>
+    <p>This section provides detailed information about my consulting services, financial solutions, and selected successful project stories.</p>
     <p>
       <a href="cv.pdf" download class="cv-button">Download My CV</a>
     </p>
@@ -186,30 +248,92 @@
 
   <section id="testing">
     <h2>Testing Area</h2>
-    <p>This area is reserved for showcasing selected images or projects. Click an image to view it larger.</p>
+    <p>This area is reserved for showcasing images or projects. Click an image to view it larger and navigate with arrows. <span style="opacity:.7;">(Demo gallery)</span></p>
     <div class="image-gallery">
-      <a href="#img1"><img src="images/project1.jpg" alt="Project 1"></a>
-      <a href="#img2"><img src="images/project2.jpg" alt="Project 2"></a>
-      <a href="#img3"><img src="images/project3.jpg" alt="Project 3"></a>
+      <img src="images/project1.jpg" alt="Project 1" data-index="0">
+      <img src="images/project2.jpg" alt="Project 2" data-index="1">
+      <img src="images/project3.jpg" alt="Project 3" data-index="2">
     </div>
   </section>
 
-  <!-- Lightbox Modals -->
-  <div class="lightbox" id="img1">
-    <a href="#"><img src="images/project1.jpg" alt="Project 1"></a>
-  </div>
-
-  <div class="lightbox" id="img2">
-    <a href="#"><img src="images/project2.jpg" alt="Project 2"></a>
-  </div>
-
-  <div class="lightbox" id="img3">
-    <a href="#"><img src="images/project3.jpg" alt="Project 3"></a>
+  <!-- Custom Lightbox Modal -->
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-img-wrapper">
+      <span class="arrow left">&larr;</span>
+      <img class="lightbox-img" src="" alt="Enlarged project">
+      <span class="arrow right">&rarr;</span>
+      <button class="close-btn" title="Close">&times;</button>
+    </div>
   </div>
 
   <footer>
     &copy; 2025 Sarfraz.work | All Rights Reserved
   </footer>
 
+  <script>
+    // Fade-in sections
+    document.addEventListener('DOMContentLoaded', function() {
+      let sections = document.querySelectorAll("section");
+      const revealSection = () => {
+        let scrollY = window.scrollY + window.innerHeight;
+        sections.forEach(sec => {
+          if (scrollY > sec.offsetTop + 100) {
+            sec.classList.add('visible');
+          }
+        });
+      };
+      revealSection();
+      window.addEventListener('scroll', revealSection);
+    });
+
+    // Lightbox Gallery logic
+    const galleryImages = document.querySelectorAll('.image-gallery img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.querySelector('.lightbox-img');
+    const leftArrow = document.querySelector('.arrow.left');
+    const rightArrow = document.querySelector('.arrow.right');
+    const closeBtn = document.querySelector('.close-btn');
+    let currentIndex = 0;
+    const imageSources = Array.from(galleryImages).map(img => img.src);
+
+    function setLightbox(index) {
+      if (index < 0 || index >= imageSources.length) return;
+      currentIndex = index;
+      lightboxImg.src = imageSources[currentIndex];
+      lightbox.classList.add('active');
+      lightboxImg.alt = galleryImages[currentIndex].alt;
+      leftArrow.style.display = (currentIndex > 0) ? 'block' : 'none';
+      rightArrow.style.display = (currentIndex < imageSources.length - 1) ? 'block' : 'none';
+    }
+
+    galleryImages.forEach((img, idx) => {
+      img.addEventListener('click', () => setLightbox(idx));
+    });
+
+    leftArrow.addEventListener('click', e => {
+      e.stopPropagation();
+      if (currentIndex > 0) setLightbox(currentIndex - 1);
+    });
+
+    rightArrow.addEventListener('click', e => {
+      e.stopPropagation();
+      if (currentIndex < imageSources.length - 1) setLightbox(currentIndex + 1);
+    });
+
+    closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
+
+    // Close lightbox on overlay click
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) lightbox.classList.remove('active');
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if(!lightbox.classList.contains('active')) return;
+      if(e.key === 'ArrowLeft' && currentIndex > 0) setLightbox(currentIndex-1);
+      if(e.key === 'ArrowRight' && currentIndex < imageSources.length-1) setLightbox(currentIndex+1);
+      if(e.key === 'Escape') lightbox.classList.remove('active');
+    });
+  </script>
 </body>
 </html>
