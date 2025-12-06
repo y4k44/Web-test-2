@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sarfraz.work</title>
+  <title>Sarfraz.work | Logistics & Tech</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    /* --- Base Styles --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -15,6 +16,7 @@
       line-height: 1.6;
     }
 
+    /* --- Header & Nav --- */
     header {
       display: flex;
       justify-content: space-between;
@@ -23,7 +25,8 @@
       border-bottom: 1px solid #ddd;
       position: sticky;
       top: 0;
-      background: #fff;
+      background: rgba(255, 255, 255, 0.95); /* Slight transparency */
+      backdrop-filter: blur(5px);
       z-index: 100;
       animation: fade-down 0.8s;
     }
@@ -53,10 +56,13 @@
       top: -2px;
     }
 
+    /* --- Hero Section --- */
     main {
-      padding: 4em 2em;
+      padding: 6em 2em 4em 2em;
       text-align: center;
       animation: fade-in 0.8s;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     @keyframes fade-in {
@@ -64,8 +70,19 @@
       to   { opacity: 1; transform: translateY(0);}
     }
 
+    main h2 {
+      font-size: 2.5em;
+      margin-bottom: 0.5em;
+      color: #111;
+    }
+    
+    main span.highlight {
+      color: #0072ff;
+    }
+
+    /* --- General Sections --- */
     section {
-      padding: 6em 2em;
+      padding: 5em 2em;
       max-width: 1000px;
       margin: auto;
       opacity: 0;
@@ -78,71 +95,104 @@
     }
     section h2 {
       font-weight: 700;
-      font-size: 1.8em;
+      font-size: 2em;
       color: #0072ff;
       margin-bottom: 1em;
       letter-spacing: .02em;
-      opacity: .94;
+      text-align: left; /* Align headers left for cleaner look */
+      border-left: 4px solid #0072ff;
+      padding-left: 15px;
     }
 
     section p {
       font-size: 1.1em;
-      color: #333;
-      margin-bottom: 1em;
+      color: #444;
+      margin-bottom: 1.5em;
     }
 
-    /* CV Button */
+    /* --- Projects Grid (New) --- */
+    .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2em;
+        margin-top: 2em;
+    }
+
+    .project-card {
+        background: #f9f9f9;
+        padding: 2em;
+        border-radius: 8px;
+        border: 1px solid #eee;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        border-color: #0072ff;
+    }
+
+    .project-card h3 {
+        font-size: 1.3em;
+        margin-bottom: 0.5em;
+        color: #111;
+    }
+
+    /* --- CV Button --- */
     .cv-button {
       display: inline-block;
-      padding: 0.7em 1.5em;
+      padding: 0.8em 2em;
       background: #0072ff;
       color: #fff;
       text-decoration: none;
       border-radius: 4px;
       font-weight: 600;
       transition: background 0.3s, transform 0.25s;
-      box-shadow: 0 2px 8px rgba(0,114,255,0.07);
+      box-shadow: 0 4px 12px rgba(0,114,255,0.2);
+      margin-top: 2em;
     }
 
     .cv-button:hover {
       background: #005bb5;
-      transform: scale(1.06);
+      transform: scale(1.03);
     }
 
-    /* Image Gallery */
+    /* --- Image Gallery --- */
     .image-gallery {
       display: flex;
       flex-wrap: wrap;
-      gap: 2em;
+      gap: 1.5em;
       justify-content: center;
       margin-top: 2em;
     }
 
     .image-gallery img {
-      width: 250px;
+      width: 280px;
+      height: 200px; /* Fixed height for consistency */
+      object-fit: cover;
       border-radius: 4px;
       border: 1px solid #ddd;
       cursor: pointer;
       transition: transform 0.3s, box-shadow 0.2s;
-      box-shadow: 0 1px 6px rgba(50,60,90,0.08);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
     .image-gallery img:hover {
-      transform: scale(1.08);
-      box-shadow: 0 6px 24px rgba(0,114,255,0.08);
+      transform: scale(1.05);
+      box-shadow: 0 6px 24px rgba(0,114,255,0.15);
     }
 
-    /* Lightbox Styles */
+    /* --- Lightbox Styles --- */
     .lightbox-overlay {
       display: none;
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.85);
+      background: rgba(0,0,0,0.9);
       justify-content: center;
       align-items: center;
       z-index: 1000;
-      animation: fade-in 0.5s;
+      animation: fade-in 0.3s;
     }
     .lightbox-overlay.active {
       display: flex;
@@ -156,64 +206,63 @@
     .lightbox-img {
       max-width: 90vw;
       max-height: 85vh;
-      border-radius: 8px;
-      box-shadow: 0 0 24px rgba(0,30,60,0.18);
+      border-radius: 4px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
       background: #fff;
-      animation: img-pop .45s;
+      animation: img-pop .3s;
     }
     @keyframes img-pop {
-      from { transform: scale(0.7); opacity:0;}
+      from { transform: scale(0.9); opacity:0;}
       to { transform: scale(1); opacity:1;}
     }
     .arrow {
-      font-size: 2.2em;
+      font-size: 2.5em;
       color: #fff;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      padding: 0.3em 0.8em;
+      padding: 0 0.5em;
       cursor: pointer;
-      background: rgba(0,114,255,0.15);
-      border-radius: 6px;
-      transition: background 0.2s;
+      transition: color 0.2s;
       z-index: 30;
       user-select: none;
     }
-    .arrow.left { left: -64px; }
-    .arrow.right { right: -64px; }
-    .arrow:hover { background: rgba(0,114,255,0.33); }
+    .arrow.left { left: -80px; }
+    .arrow.right { right: -80px; }
+    .arrow:hover { color: #0072ff; }
+    
     .close-btn {
       position: absolute;
-      top: -48px;
-      right: 0;
-      font-size: 1.8em;
+      top: -50px;
+      right: -20px;
+      font-size: 2em;
       color: #fff;
-      background: rgba(0,0,0,0.26);
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
+      background: transparent;
       border: none;
-      text-align: center;
-      transition: background 0.2s;
+      cursor: pointer;
+      transition: color 0.2s;
       z-index: 40;
     }
-    .close-btn:hover {
-      background: rgba(0,114,255,0.64);
-      color: #fff;
-    }
+    .close-btn:hover { color: #0072ff; }
 
+    /* --- Footer --- */
     footer {
       text-align: center;
-      padding: 2em;
-      border-top: 1px solid #ddd;
+      padding: 3em 2em;
+      border-top: 1px solid #eee;
       font-size: 0.9em;
-      color: #777;
-      animation: fade-in 1.2s;
+      color: #888;
+      margin-top: 4em;
     }
 
-    html {
-      scroll-behavior: smooth;
+    html { scroll-behavior: smooth; }
+    
+    /* Mobile tweaks */
+    @media (max-width: 768px) {
+        header { padding: 1em; }
+        nav a { margin-left: 1em; font-size: 0.9em;}
+        .arrow.left { left: 10px; background: rgba(0,0,0,0.5); border-radius: 5px; }
+        .arrow.right { right: 10px; background: rgba(0,0,0,0.5); border-radius: 5px; }
     }
   </style>
 </head>
@@ -222,41 +271,64 @@
   <header>
     <h1>Sarfraz.work</h1>
     <nav>
-      <a href="#about">About Me</a>
-      <a href="#info">Info</a>
-      <a href="#testing">Testing Area</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#gallery">Gallery</a>
     </nav>
   </header>
 
   <main>
-    <h2>Welcome to Sarfraz.work</h2>
-    <p>Your professional landing page for consulting and financial services. Explore below to learn more about my expertise.</p>
+    <h2>Shipping/Logistics worker & <br> <span class="highlight">project maker</span></h2>
+    <p>Navigating the global supply chain as a trade. Building digital infrastructure and engineering titanium prototypes as an enthusiast. </p>
   </main>
 
   <section id="about">
     <h2>About Me</h2>
-    <p>Hello! I’m Sarfraz. I specialize in consulting, banking, and finance. This section introduces who I am, my expertise, and my professional approach to helping individuals and businesses thrive.</p>
-  </section>
-
-  <section id="info">
-    <h2>Info</h2>
-    <p>This section provides detailed information about my consulting services, financial solutions, and selected successful project stories.</p>
     <p>
-      <a href="cv.pdf" download class="cv-button">Download My CV</a>
+      Hi, I'm Y.Sarfraz. I am currently a student working within the <strong>shipping and logistics</strong> industry. My current focus is on optimizing supply chains, import export law, and ensuring operational efficiency with minimal downtime. 
+    </p>
+    <p>
+      Outside of my day job, I am an enthusiastic technologist. I love bridging the gap between physical engineering and digital solutions. Whether it's setting up custom mail servers or pushing the boundaries of <strong>Additive Manufacturing (SLM)</strong>, I am always learning and building.
     </p>
   </section>
 
-  <section id="testing">
-    <h2>Testing Area</h2>
-    <p>This area is reserved for showcasing images or projects. Click an image to view it larger and navigate with arrows. <span style="opacity:.7;">(Demo gallery)</span></p>
-    <div class="image-gallery">
-      <img src="images/img" alt="img" data-index="0">
-      <img src="images/project2.jpg" alt="Project 2" data-index="1">
-      <img src="images/project3.jpg" alt="Project 3" data-index="2">
+  <section id="projects">
+    <h2>Current Projects</h2>
+    <p>Here is a snapshot of what I am currently working on:</p>
+    
+    <div class="project-grid">
+        <div class="project-card">
+            <h3>Titanium SLM Printing</h3>
+            <p>Exploring Selective Laser Melting (SLM) to create complex, high-strength titanium geometries. Focused on optimizing print parameters for durability.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>Custom Email Infrastructure</h3>
+            <p>Built a personalized email domain system from the ground up, focusing on DNS management, security protocols (DKIM/SPF), and deliverability.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>Tech Blog & Web Dev</h3>
+            <p>Developing <strong>Sarfraz.work</strong> and a companion blog to document my journey in logistics and engineering. This site acts as my central hub.</p>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+      <a href="cv.pdf" download class="cv-button">Download My CV</a>
     </div>
   </section>
 
-  <!-- Custom Lightbox Modal -->
+  <section id="gallery">
+    <h2>Testing Area & Gallery</h2>
+    <p>A visual showcase of my SLM Titanium 3D prints and engineering tests. <br><span style="opacity:.7; font-size: 0.9em;">(Click images to enlarge)</span></p>
+    
+    <div class="image-gallery">
+      <img src="https://via.placeholder.com/400x300?text=SLM+Print+1" alt="Titanium SLM Prototype 1" data-index="0">
+      <img src="https://via.placeholder.com/400x300?text=SLM+Print+2" alt="Titanium SLM Prototype 2" data-index="1">
+      <img src="https://via.placeholder.com/400x300?text=Server+Setup" alt="Homelab Setup" data-index="2">
+    </div>
+  </section>
+
   <div class="lightbox-overlay" id="lightbox">
     <div class="lightbox-img-wrapper">
       <span class="arrow left">&larr;</span>
@@ -264,14 +336,14 @@
       <span class="arrow right">&rarr;</span>
       <button class="close-btn" title="Close">&times;</button>
     </div>
-  </div>
+  </main>
 
   <footer>
-    &copy; 2025 Sarfraz.work | All Rights Reserved
+    &copy; 2025 Sarfraz.work | Shipping, Logistics & Technology
   </footer>
 
   <script>
-    // Fade-in sections
+    // Fade-in sections logic
     document.addEventListener('DOMContentLoaded', function() {
       let sections = document.querySelectorAll("section");
       const revealSection = () => {
@@ -294,14 +366,18 @@
     const rightArrow = document.querySelector('.arrow.right');
     const closeBtn = document.querySelector('.close-btn');
     let currentIndex = 0;
+    
+    // Collect sources dynamically
     const imageSources = Array.from(galleryImages).map(img => img.src);
 
     function setLightbox(index) {
       if (index < 0 || index >= imageSources.length) return;
       currentIndex = index;
       lightboxImg.src = imageSources[currentIndex];
+      lightboxImg.alt = galleryImages[currentIndex].alt; 
       lightbox.classList.add('active');
-      lightboxImg.alt = galleryImages[currentIndex].alt;
+      
+      // Manage arrow visibility
       leftArrow.style.display = (currentIndex > 0) ? 'block' : 'none';
       rightArrow.style.display = (currentIndex < imageSources.length - 1) ? 'block' : 'none';
     }
@@ -322,7 +398,7 @@
 
     closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
 
-    // Close lightbox on overlay click
+    // Close on background click
     lightbox.addEventListener('click', e => {
       if (e.target === lightbox) lightbox.classList.remove('active');
     });
