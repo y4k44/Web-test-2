@@ -1,19 +1,9 @@
-</html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <body>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sarfraz.work</title>
-
-  <!-- Favicon Links -->
-  <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-  <link rel="icon" sizes="192x192" href="favicon/android-chrome-192x192.png">
-  <link rel="icon" sizes="512x512" href="favicon/android-chrome-512x512.png">
-  <link rel="manifest" href="favicon/site.webmanifest">
-
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -221,11 +211,129 @@
       color: #777;
       animation: fade-in 1.2s;
     }
-    <body>
-    </html>
 
     html {
       scroll-behavior: smooth;
     }
   </style>
 </head>
+<body>
+
+  <header>
+    <h1>Sarfraz.work</h1>
+    <nav>
+      <a href="#about">About Me</a>
+      <a href="#info">Info</a>
+      <a href="#testing">Testing Area</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Welcome to Sarfraz.work</h2>
+    <p>Your professional landing page for consulting and financial services. Explore below to learn more about my expertise.</p>
+  </main>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Hello! I’m Sarfraz. I specialize in consulting, banking, and finance. This section introduces who I am, my expertise, and my professional approach to helping individuals and businesses thrive.</p>
+  </section>
+
+  <section id="info">
+    <h2>Info</h2>
+    <p>This section provides detailed information about my consulting services, financial solutions, and selected successful project stories.</p>
+    <p>
+      <a href="cv.pdf" download class="cv-button">Download My CV</a>
+    </p>
+  </section>
+
+  <section id="testing">
+    <h2>Testing Area</h2>
+    <p>This area is reserved for showcasing images or projects. Click an image to view it larger and navigate with arrows. <span style="opacity:.7;">(Demo gallery)</span></p>
+    <div class="image-gallery">
+      <img src="images/img" alt="img" data-index="0">
+      <img src="images/project2.jpg" alt="Project 2" data-index="1">
+      <img src="images/project3.jpg" alt="Project 3" data-index="2">
+    </div>
+  </section>
+
+  <!-- Custom Lightbox Modal -->
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-img-wrapper">
+      <span class="arrow left">&larr;</span>
+      <img class="lightbox-img" src="" alt="Enlarged project">
+      <span class="arrow right">&rarr;</span>
+      <button class="close-btn" title="Close">&times;</button>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Sarfraz.work | All Rights Reserved
+  </footer>
+
+  <script>
+    // Fade-in sections
+    document.addEventListener('DOMContentLoaded', function() {
+      let sections = document.querySelectorAll("section");
+      const revealSection = () => {
+        let scrollY = window.scrollY + window.innerHeight;
+        sections.forEach(sec => {
+          if (scrollY > sec.offsetTop + 100) {
+            sec.classList.add('visible');
+          }
+        });
+      };
+      revealSection();
+      window.addEventListener('scroll', revealSection);
+    });
+
+    // Lightbox Gallery logic
+    const galleryImages = document.querySelectorAll('.image-gallery img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.querySelector('.lightbox-img');
+    const leftArrow = document.querySelector('.arrow.left');
+    const rightArrow = document.querySelector('.arrow.right');
+    const closeBtn = document.querySelector('.close-btn');
+    let currentIndex = 0;
+    const imageSources = Array.from(galleryImages).map(img => img.src);
+
+    function setLightbox(index) {
+      if (index < 0 || index >= imageSources.length) return;
+      currentIndex = index;
+      lightboxImg.src = imageSources[currentIndex];
+      lightbox.classList.add('active');
+      lightboxImg.alt = galleryImages[currentIndex].alt;
+      leftArrow.style.display = (currentIndex > 0) ? 'block' : 'none';
+      rightArrow.style.display = (currentIndex < imageSources.length - 1) ? 'block' : 'none';
+    }
+
+    galleryImages.forEach((img, idx) => {
+      img.addEventListener('click', () => setLightbox(idx));
+    });
+
+    leftArrow.addEventListener('click', e => {
+      e.stopPropagation();
+      if (currentIndex > 0) setLightbox(currentIndex - 1);
+    });
+
+    rightArrow.addEventListener('click', e => {
+      e.stopPropagation();
+      if (currentIndex < imageSources.length - 1) setLightbox(currentIndex + 1);
+    });
+
+    closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
+
+    // Close lightbox on overlay click
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) lightbox.classList.remove('active');
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if(!lightbox.classList.contains('active')) return;
+      if(e.key === 'ArrowLeft' && currentIndex > 0) setLightbox(currentIndex-1);
+      if(e.key === 'ArrowRight' && currentIndex < imageSources.length-1) setLightbox(currentIndex+1);
+      if(e.key === 'Escape') lightbox.classList.remove('active');
+    });
+  </script>
+</body>
+</html>
